@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Previsualización de mensajes renderizados -->
+<div class="card">
+	<h3>Previsualización de mensajes</h3>
+	<p>Total destinatarios: <strong>{{ total }}</strong></p>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Para</th>
+				<th>Asunto</th>
+				<th>Contenido</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for s in samples %}
+			<tr>
+				<td>{{ s.to }}</td>
+				<td>{{ s.subject }}</td>
+				<td><div style="max-width:520px; max-height:180px; overflow:auto; border:1px solid rgba(255,255,255,.18); padding:.5rem;">{{ s.body | safe }}</div></td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+<!-- Credenciales SMTP y opciones de adjunto/recordar -->
+<div class="card">
+	<h3>Credenciales SMTP (Gmail)</h3>
+	<form action="{{ url_for('send_emails') }}" method="post" enctype="multipart/form-data" style="margin-top:.5rem; display:grid; gap:.5rem;">
+		<label for="smtp_email">Correo remitente (Gmail institucional)</label>
+		<input type="text" id="smtp_email" name="smtp_email" placeholder="remitente@tu-dominio.edu" value="{{ smtp_email or '' }}" required />
+
+		<label for="from_name">Nombre remitente (opcional)</label>
+		<input type="text" id="from_name" name="from_name" placeholder="Centro de Idiomas" value="{{ from_name or '' }}" />
+
+		<label for="smtp_app_password">Contraseña de aplicación</label>
+		<input type="password" id="smtp_app_password" name="smtp_app_password" placeholder="16 caracteres de Google" value="{{ smtp_app_password or '' }}" required />
+
+		<div style="display:grid; grid-template-columns: 1fr 1fr; gap:.5rem;">
+			<div>
+				<label for="smtp_host">SMTP host</label>
+				<input type="text" id="smtp_host" name="smtp_host" value="{{ smtp_host or 'smtp.gmail.com' }}" />
+			</div>
+			<div>
+				<label for="smtp_port">SMTP puerto</label>
+				<input type="text" id="smtp_port" name="smtp_port" value="{{ smtp_port or '587' }}" />
+			</div>
+		</div>
+
+		<label for="attachments">Adjuntar PDF(s) (opcional, se enviará a todos)</label>
+		<input type="file" id="attachments" name="attachments" accept="application/pdf" multiple />
+
+		<label style="display:flex; align-items:center; gap:.5rem;">
+			<input type="checkbox" name="remember_credentials" /> Recordar credenciales en este equipo (.env)
+		</label>
+
+		<div style="margin-top: .5rem; display:flex; gap: .5rem;">
+			<button type="submit">Enviar correos</button>
+			<a href="{{ url_for('index') }}"><button class="secondary" type="button">Cancelar</button></a>
+		</div>
+	</form>
+	<p style="margin-top:.5rem; font-size: .9rem; color:#e8f0fe; opacity:.9;">Requiere Verificación en dos pasos y una “Contraseña de aplicación” en Google.</p>
+</div>
+{% endblock %}

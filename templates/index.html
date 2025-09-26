@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Formulario de carga y redacción del mensaje -->
+<div class="card">
+	<form action="{{ url_for('prepare') }}" method="post" enctype="multipart/form-data">
+		<label for="file">Archivo Excel o CSV</label>
+		<!-- Limitamos a .csv/.xls/.xlsx -->
+		<input type="file" id="file" name="file" accept=".csv,.xls,.xlsx" required />
+
+		<label for="default_subject">Asunto por defecto</label>
+		<input type="text" id="default_subject" name="default_subject" placeholder="Asunto del correo" />
+
+		<label for="message_template">Cuerpo del mensaje (HTML permitido)</label>
+		<!-- Puedes usar variables {{ name }} y {{ email }} -->
+		<textarea id="message_template" name="message_template" rows="10" placeholder="Ej.: Estimado/a {{ name }}, le informamos que..." required></textarea>
+
+		<div style="margin-top: 1rem; display:flex; gap: .5rem;">
+			<button type="submit">Subir y previsualizar</button>
+		</div>
+	</form>
+</div>
+
+<!-- Ayuda rápida -->
+<div class="card">
+	<p>Usa variables: <code>{{ '{{ name }}' }}</code> y <code>{{ '{{ email }}' }}</code> en tu plantilla.</p>
+	<p>La firma institucional se añadirá automáticamente al final.</p>
+</div>
+{% endblock %}

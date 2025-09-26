@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+	<h3>Resultados del envío</h3>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Para</th>
+				<th>Estado</th>
+				<th>Detalle</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for r in results %}
+			<tr>
+				<td>{{ r.to }}</td>
+				<td>{{ r.status }}</td>
+				<td>{{ r.detail }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<div style="margin-top:1rem;">
+		<a href="{{ url_for('index') }}"><button type="button">Volver al inicio</button></a>
+	</div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Paso: selección de mapeo de columnas -->
+<div class="card">
+	<h3>Mapea las columnas</h3>
+	<form action="{{ url_for('map_columns') }}" method="post">
+		<label for="email_col">Columna de correo</label>
+		<select id="email_col" name="email_col" required>
+			<option value="">-- Selecciona --</option>
+			{% for col in columns %}
+				<option value="{{ col }}">{{ col }}</option>
+			{% endfor %}
+		</select>
+
+		<label for="name_col">Columna de nombre</label>
+		<select id="name_col" name="name_col" required>
+			<option value="">-- Selecciona --</option>
+			{% for col in columns %}
+				<option value="{{ col }}">{{ col }}</option>
+			{% endfor %}
+		</select>
+
+		<label for="subject_col">Columna de asunto (opcional)</label>
+		<select id="subject_col" name="subject_col">
+			<option value="">(Usar asunto por defecto)</option>
+			{% for col in columns %}
+				<option value="{{ col }}">{{ col }}</option>
+			{% endfor %}
+		</select>
+
+		<div style="margin-top: 1rem; display:flex; gap: .5rem;">
+			<button type="submit">Confirmar mapeo</button>
+			<a href="{{ url_for('index') }}"><button class="secondary" type="button">Cancelar</button></a>
+		</div>
+	</form>
+</div>
+
+<!-- Vista rápida: muestra de las primeras filas del archivo -->
+<div class="card">
+	<h4>Vista rápida de datos</h4>
+	<table class="table">
+		<thead>
+			<tr>
+				{% for k in sample[0].keys() %}
+					<th>{{ k }}</th>
+				{% endfor %}
+			</tr>
+		</thead>
+		<tbody>
+			{% for row in sample %}
+			<tr>
+				{% for v in row.values() %}
+					<td>{{ v }}</td>
+				{% endfor %}
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% endblock %}
+
