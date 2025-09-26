@@ -1,0 +1,17 @@
+[build]
+builder = "nixpacks"
+
+[deploy]
+startCommand = "python app.py"
+healthcheckPath = "/"
+healthcheckTimeout = 100
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
+
+[env]
+SMTP_EMAIL = "ceidsoporte.flch@unmsm.edu.pe"
+SMTP_APP_PASSWORD = "dgjr jxdm dske dxos"
+SMTP_FROM_NAME = "Centro de Idiomas"
+SMTP_HOST = "smtp.gmail.com"
+SMTP_PORT = "587"
+FLASK_SECRET_KEY = "change-me-in-production"

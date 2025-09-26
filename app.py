@@ -392,5 +392,7 @@ Av. Universitaria, Calle Germán Amézaga Nº 375. Ciudad Universitaria, Lima"""
 
 
 if __name__ == '__main__':
-	# Ejecutar servidor de desarrollo
-	app.run(debug=True)
+	# Obtener puerto de Railway o usar 5000 por defecto
+	port = int(os.environ.get('PORT', 5000))
+	# Ejecutar servidor
+	app.run(host='0.0.0.0', port=port, debug=False)

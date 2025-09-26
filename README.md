@@ -13,7 +13,17 @@ Sistema web para envío masivo de correos personalizados con Gmail, desarrollado
 
 ## 🚀 Instalación y Uso
 
-### Requisitos
+### 🌐 Acceso en línea (Recomendado)
+**El sistema ya está desplegado en la nube y disponible en:**
+- 🔗 **URL**: [https://correo-alumnos.railway.app](https://correo-alumnos.railway.app)
+- ✅ **No requiere instalación**
+- ✅ **Funciona desde cualquier navegador**
+- ✅ **Acceso inmediato**
+
+### 💻 Instalación local (Opcional)
+Si prefieres ejecutarlo localmente:
+
+#### Requisitos
 - Python 3.8 o superior
 - Cuenta de Gmail con verificación en dos pasos habilitada
 - Contraseña de aplicación de Gmail
